@@ -378,14 +378,34 @@
 
 #----------------------------------------------------------
 
-def employee_details(**details):
-    for key,value in details.items():
-        print(key,":",value)
+# def employee_details(**details):
+#     for key,value in details.items():
+#         print(key,":",value)
 
-employee_details(
-    Emp_name ="Tejas",
-    Age =27,
-    Department="It",
-    Salary = "1cr"
-)
+# employee_details(
+#     Emp_name ="Tejas",
+#     Age =27,
+#     Department="It",
+#     Salary = "1cr"
+# )
 
+# --------------------------------------OOP------------------------------------------------------
+
+class myclass :
+    total_students = 6
+
+    def __init__(self,name,age):
+        self.name=name
+        self.age=age
+
+    def info(self):
+        print(f"{self.name} is {self.age} years old !!")
+std1= myclass("tejas",23)
+std2= myclass("veena",27)
+
+print(std1.age)
+print(std2.name)
+print(std2.info())
+print(std2.total_students)
+print(std1.total_students)
+print(myclass.total_students)
