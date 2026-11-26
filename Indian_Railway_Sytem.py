@@ -287,63 +287,164 @@ seat_number = [1,2,3,4,5]
 
 # Encapsulation ------------------------------------------------------------------------------------
 
-class BankAccount:
+# class BankAccount:
 
-    def __init__(self,account_number,initial_balance =0):
-        self._account_number =account_number  # protected attribute we use  "_"
-        self.__balance= initial_balance      # private attribute we use "__"  
+#     def __init__(self,account_number,initial_balance =0):
+#         self._account_number =account_number  # protected attribute we use  "_"
+#         self.__balance= initial_balance      # private attribute we use "__"  
 
-    @property
-    def balance(self):
-        return self.__balance
+#     @property
+#     def balance(self):
+#         return self.__balance
 
-    @property
-    def account_number(self):
-        return self._account_number
+#     @property
+#     def account_number(self):
+#         return self._account_number
 
-    def deposit(self,amount):
-        if amount > 0 :
-            self.__balance += amount
-            print(f"Deposited Amount: ₹{amount}. New Balance :₹{self.__balance}")
-        else:
-            print("Invalid Amount !!")
+#     def deposit(self,amount):
+#         if amount > 0 :
+#             self.__balance += amount
+#             print(f"Deposited Amount: ₹{amount}. New Balance :₹{self.__balance}")
+#         else:
+#             print("Invalid Amount !!")
 
-    def withdraw(self,amount):
-        if 0 < amount <= self.__balance :
-            self.__balance -= amount
-            print(f"Witthdrawn Amount :₹{amount}. New Balance :₹{self.__balance}")
-        else:
-            print("Invalid Witthdrawl or insufficient Funds  !!")
+#     def withdraw(self,amount):
+#         if 0 < amount <= self.__balance :
+#             self.__balance -= amount
+#             print(f"Witthdrawn Amount :₹{amount}. New Balance :₹{self.__balance}")
+#         else:
+#             print("Invalid Witthdrawl or insufficient Funds  !!")
 
 
-class Ticket :
-    def __init__(self,pasenger_name,train_number,seat_number):
-        self.__passenger_name = pasenger_name
-        self.__train_number = train_number
-        self.__seat_number= seat_number
-        self.__is_confirmed = False
+# class Ticket :
+#     def __init__(self,pasenger_name,train_number,seat_number):
+#         self.__passenger_name = pasenger_name
+#         self.__train_number = train_number
+#         self.__seat_number= seat_number
+#         self.__is_confirmed = False
 
-    def confirm_ticket(self):
-        self.__is_confirmed = True
+#     def confirm_ticket(self):
+#         self.__is_confirmed = True
 
-    def Details(self):
-        status ="Confirmed " if self.__is_confirmed else "Pending"
-        return{
-            "Passenger :":self.__passenger_name,
-            "Train :":self.__train_number,
-            "Seat Number :":self.__seat_number,
-            "Status :":status
-        }
+#     def Details(self):
+#         status ="Confirmed " if self.__is_confirmed else "Pending"
+#         return{
+#             "Passenger :":self.__passenger_name,
+#             "Train :":self.__train_number,
+#             "Seat Number :":self.__seat_number,
+#             "Status :":status
+#         }
 
-print("===== BANK ACCOUNT =====")
-account = BankAccount("IR123456789")
-account.deposit(1000)
-account.withdraw(500)
-print("Current balance :₹",account.balance)
+# print("===== BANK ACCOUNT =====")
+# account = BankAccount("IR123456789")
+# account.deposit(1000)
+# account.withdraw(500)
+# print("Current balance :₹",account.balance)
 
-print("\n==Ticket==")
+# print("\n==Ticket==")
 
-ticket = Ticket("Tejas palve",12301,"A5")
-print("Before Confiramation :",ticket.Details())
-ticket.confirm_ticket()
-print("After Confirmation :",ticket.Details())
+# ticket = Ticket("Tejas palve",12301,"A5")
+# print("Before Confiramation :",ticket.Details())
+# ticket.confirm_ticket()
+# print("After Confirmation :",ticket.Details())
+
+# Polymorphism -----------------------------------------------------------------------------------
+
+# class PaymentMethod :
+#     def process_payment(self,amount):
+#         raise NotImplementedError("Subclass must implemented anstract method")
+
+# class creditCard(PaymentMethod):
+#     def process_payment(self, amount):
+#         return f"Processing {amount} via Credit card ."
+
+# class DebitCard(PaymentMethod):
+#     def process_payment(self, amount):
+#         return f"Processing {amount} via Debit card ."
+
+# class Upi(PaymentMethod):
+#     def process_payment(self, amount):
+#         return f"Processing {amount} via Upi ."
+
+# class NetBanking(PaymentMethod):
+#     def process_payment(self, amount):
+#         return f"Processing {amount} via Net Banking ."
+    
+
+# def make_payment(payment_method,amount):
+#     return payment_method.process_payment(amount)
+
+# print("=== Payment method ===")
+
+# payments =[
+#     creditCard(),
+#     DebitCard(),
+#     Upi(),
+#     NetBanking()
+# ]
+
+# for payments in payments:
+#     print(make_payment(payments,1500))
+
+# Magic Methods For Customized Behaviours -------------------------------------------------------
+
+# class Ticket :
+#     def __init__(self,pnr,passenger_name):
+#         self.pnr =pnr
+#         self.passenger_name = passenger_name
+
+#     def __str__(self):
+#         return  f"Ticket(PNR :{self.pnr}, passenger :{self.passenger_name})"
+
+#     def  __repr__(self):
+#         return f"Ticket(pnr ='{self.pnr}',passenger_name='{self.passenger_name}')"
+
+#     def __eq__(self,other):
+#         if isinstance(other,Ticket):
+#             return self.pnr == other.pnr
+#         return False
+
+# print("== Ticket magic Methods ==")
+# ticket1 = Ticket("1234567890","Rahul kumar")
+# ticket2 = Ticket("1234567890","Rahul kumar")
+# ticket3 = Ticket("9034567890","Priya Singh")
+
+# print(f"User - Friendly :{ticket1}")
+# print(f"Developer - friendly : {repr(ticket2)}")
+# print(f"Ticket1 == Ticket2 :{ticket1 == ticket2}")
+# print(f"Ticket1 == Ticket3 :{ticket1 == ticket3}")
+
+# Train Shedule Management ---------------------------------------------------------------------
+
+train_schedule =[]
+
+train_schedule.append({
+    "number":1234,
+    "name":"Rajdhani Express",
+    "departure":"14:00",
+    "arrival":"10:30",
+    "duration":"20h 30m"
+})
+
+train_schedule.append({
+    "number":1233,
+    "name":"Deccan Express",
+    "departure":"16:00",
+    "arrival":"9:30",
+    "duration":"4h 30m"
+})
+
+# List Operation 
+
+print("Train Schedules")
+print(f"Total trains :{len(train_schedule)}")
+
+first_train = train_schedule[0]
+print(f"First Train :{first_train}")
+
+Morning_train = train_schedule[:1]
+print(f"Morning Train  :{[t['name'] for t in Morning_train]}")
+
+print(Morning_train)
+
+
